@@ -6,15 +6,18 @@ describe('Tugas Fixture Test Web Saucedemo', () => {
         cy.url().should('include', 'saucedemo.com')
 
     // Login dengan username dan password yang salah    
-        cy.get('#user-name').type('locked_out_user')
-        cy.get('#password').type('secret_sauce')
+    cy.fixture("user").then(user => {
+        const username = user.locked_out_user.username
+        const password = user.locked_out_user.password
+        cy.get('#user-name').type(username)
+        cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()
         cy.get('.error-message-container.error').should('be.visible', 'Epic sadface: Sorry, this user has been locked out.')
-    
+    })
     // Login dengan username dan password yang salah
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').clear()
         cy.get('#user-name').type(username)
         cy.get('#password').clear()
@@ -29,11 +32,9 @@ describe('Tugas Fixture Test Web Saucedemo', () => {
         cy.visit('https://www.saucedemo.com/')
         cy.url().should('include', 'saucedemo.com')
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
-        cy.get('#user-name').clear()
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').type(username)
-        cy.get('#password').clear()
         cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()
         })
@@ -48,11 +49,9 @@ describe('Tugas Fixture Test Web Saucedemo', () => {
         cy.visit('https://www.saucedemo.com/')
         cy.url().should('include', 'saucedemo.com')
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
-        cy.get('#user-name').clear()
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').type(username)
-        cy.get('#password').clear()
         cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()
         })
@@ -64,11 +63,9 @@ describe('Tugas Fixture Test Web Saucedemo', () => {
         cy.visit('https://www.saucedemo.com/')
         cy.url().should('include', 'saucedemo.com')
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
-        cy.get('#user-name').clear()
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').type(username)
-        cy.get('#password').clear()
         cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()
         })
@@ -81,42 +78,48 @@ describe('Tugas Fixture Test Web Saucedemo', () => {
         cy.visit('https://www.saucedemo.com/')
         cy.url().should('include', 'saucedemo.com')
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
-        cy.get('#user-name').clear()
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').type(username)
-        cy.get('#password').clear()
         cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()      
         })
         cy.get('#add-to-cart-sauce-labs-backpack').click()
         cy.get('#shopping_cart_container').click()
         cy.get('#checkout').click()
+        cy.fixture("user").then(user => {
+            const firstname = user.standard_user.firstname
+            const lastname = user.standard_user.lastname
+            const zip = user.standard_user.zip
         cy.get('#first-name').type('Elsa')
         cy.get('#last-name').type('Sarah')
         cy.get('#postal-code').type('13810')
         cy.get('#continue').click()
+        })
     });
 
     it('As a user, I can akses the payment page', () => {
         cy.visit('https://www.saucedemo.com/')
         cy.url().should('include', 'saucedemo.com')
         cy.fixture("user").then(user => {
-            const username = user.username
-            const password = user.password
-        cy.get('#user-name').clear()
+            const username = user.standard_user.username
+            const password = user.standard_user.password
         cy.get('#user-name').type(username)
-        cy.get('#password').clear()
         cy.get('#password').type(password)
         cy.get('#login-button.submit-button.btn_action').click()      
         })
         cy.get('#add-to-cart-sauce-labs-backpack').click()
         cy.get('#shopping_cart_container').click()
         cy.get('#checkout').click()
+        cy.fixture("user").then(user => {
+            const firstname = user.standard_user.firstname
+            const lastname = user.standard_user.lastname
+            const zip = user.standard_user.zip
         cy.get('#first-name').type('Elsa')
         cy.get('#last-name').type('Sarah')
         cy.get('#postal-code').type('13810')
         cy.get('#continue').click()
+        })
         cy.get('#finish').click()
     });
 });
