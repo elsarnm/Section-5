@@ -1,0 +1,10 @@
+{
+  "name": "Install-setup-cypress",
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^9.7.0"
+  }
+}
